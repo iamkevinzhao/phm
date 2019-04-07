@@ -1,5 +1,3 @@
-global_vars;
-
 global cyc_total io_dir;
 
 gen_new = 0; % generate new noises vs. use noises from data file

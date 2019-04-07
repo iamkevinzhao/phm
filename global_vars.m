@@ -1,5 +1,7 @@
 clear all;
 
+params
+
 global sim_ts; % simulation time step
 sim_ts = 0.0001; 
 
