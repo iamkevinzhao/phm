@@ -10,3 +10,5 @@ gen_states
 
 cpf
 
+diagrams
+

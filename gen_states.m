@@ -1,3 +1,5 @@
+function gen_states()
+
 global cyc_total;
 global g_Rs g_lambda g_L1 g_J g_B g_P;
 Rs = g_Rs;
@@ -40,4 +42,6 @@ for cyc = 2 : cyc_total;
     sim_xt(:, cyc) = xt + x_dot .* sim_ts + noise_state(:, cyc);
     
     sim_Zt(:, cyc) = H * sim_xt(:, cyc) + noise_msu(:, cyc);
+end
+
 end

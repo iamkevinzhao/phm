@@ -1,9 +1,14 @@
-global sdv_state sdv_msu sim_Zt sim_ts sys_A sys_B sys_ut cyc_total t_seq;
+function cpf()
+
+global sdv_state sdv_msu sim_Zt sim_ts sys_A sys_B sys_ut cyc_total;
+
+ns_state = sdv_state;
+ns_state = ns_state * 1.4;
 
 Pk = ...
-    [sdv_state(1)^2         0                0;
-           0          sdv_state(2)^2         0;
-           0                0          sdv_state(3)^2];
+    [ns_state(1)^2         0                0;
+           0          ns_state(2)^2         0;
+           0               0          ns_state(3)^2];
 R = ...
     [sdv_msu(1)^2         0              0;
            0        sdv_msu(2)^2         0;
@@ -15,7 +20,8 @@ M = [eye(3);
 P = ...
     [    Pk        zeros(3, 3);
      zeros(3, 3)      R];
-
+ 
+global model_xt;
 model_xt = zeros(5, cyc_total);
 
 chi_6 = 12.592;
@@ -39,4 +45,6 @@ for cyc = 2 : cyc_total
         x_tilde = model_xt(1:3, cyc);
     end
     model_xt(1:3, cyc) = x_tilde;
+end
+
 end

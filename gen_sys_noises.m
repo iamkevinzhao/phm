@@ -1,9 +1,12 @@
+function gen_sys_noises()
+
 global cyc_total io_dir;
 
 gen_new = 1; % generate new noises vs. use noises from data file
 
 global sdv_state; % standard deviation of state noises
-sdv_state = repmat(0.1, 5, 1);
+% sdv_state = repmat(0.1, 5, 1);
+sdv_state = [0.1, 0.1, 0.1, 0, 0]';
 global noise_state; % noises over time on system states
 if gen_new == 1
     noise_state = ...
@@ -24,4 +27,6 @@ if gen_new == 1
 else
     noise_msu = load([io_dir '/noise_msu.mat']);
     noise_msu = noise_msu.noise_msu;
+end
+
 end
