@@ -3,7 +3,7 @@ function cpf()
 global sdv_state sdv_msu sim_Zt sim_ts sys_A sys_B sys_ut cyc_total chi_6;
 
 ns_state = sdv_state;
-ns_state = ns_state * 1.4;
+ns_state = ns_state * 1.0;
 
 Pk = ...
     [ns_state(1)^2         0                0;
