@@ -1,4 +1,4 @@
-clc
+clc; clear;
 
 global_vars
 
@@ -11,4 +11,5 @@ gen_states
 cpf
 
 diagrams
+
 

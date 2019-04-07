@@ -22,7 +22,8 @@ sys_A = @(theta) ...
                0                            0                      -Rs/L1               (lambda_p*fc(theta))/J    0;
      (lambda_p*fa(theta))/J     (lambda_p*fb(theta))/J      (lambda_p*fc(theta))/J                -B/J            0;
                0                            0                         0                            P/2            0];    
-           
+  
+    
 sys_B = ...
     [1/L1     0       0        0;
       0      1/L1     0        0;

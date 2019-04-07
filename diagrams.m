@@ -13,7 +13,7 @@ legend('ground-truth', 'measurement', 'cpf');
 subplot(2, 1, 2);
 hold on
 plot(t_seq, cpf_d);
-chi = repmat(chi_6, cyc_total);
+chi = repmat(chi_6, 1, cyc_total);
 plot(t_seq, chi);
 
 end
