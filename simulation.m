@@ -1,10 +1,12 @@
-clc;
+clc
 
-global_vars;
+global_vars
 
-gen_sys_noises;
+gen_sys_noises
 
-gen_inputs;
+gen_inputs
 
-gen_states;
+gen_states
+
+cpf
 

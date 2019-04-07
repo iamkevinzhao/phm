@@ -7,33 +7,37 @@ J = g_J;
 B = g_B;
 P = g_P;
 
-global sys_ut sim_ts;
+global sys_ut sim_ts noise_state noise_msu;
 
-model_xt = zeros(5, cyc_total);
+global sim_xt sim_Zt;
 sim_xt = zeros(5, cyc_total);
+sim_Zt = zeros(3, cyc_total);
 
-A = @(theta) ...
+global sys_A sys_B;
+sys_A = @(theta) ...
     [       -Rs/L1                          0                         0                 (lambda_p*fa(theta))/J    0;
                0                         -Rs/L1                       0                 (lambda_p*fb(theta))/J    0;
                0                            0                      -Rs/L1               (lambda_p*fc(theta))/J    0;
      (lambda_p*fa(theta))/J     (lambda_p*fb(theta))/J      (lambda_p*fc(theta))/J                -B/J            0;
                0                            0                         0                            P/2            0];    
            
-B_mat = ...
+sys_B = ...
     [1/L1     0       0        0;
       0      1/L1     0        0;
       0       0      1/L1      0;
       0       0       0      -1/J;
       0       0       0        0];    
 
-for cyc = 2 : cyc_total;
-    theta = model_xt(5, cyc - 1);
-    xt = model_xt(:, cyc - 1);
-    x_dot = A(theta) * xt + B_mat * sys_ut(:, cyc);
-    model_xt(:, cyc) = xt + x_dot .* sim_ts;
+H = ...
+    [1 0 0 0 0;
+     0 1 0 0 0;
+     0 0 1 0 0];
+ 
+for cyc = 2 : cyc_total;    
+    xt = sim_xt(:, cyc - 1);
+    theta = xt(5);
+    x_dot = sys_A(theta) * xt + sys_B * sys_ut(:, cyc);
+    sim_xt(:, cyc) = xt + x_dot .* sim_ts + noise_state(:, cyc);
+    
+    sim_Zt(:, cyc) = H * sim_xt(:, cyc) + noise_msu(:, cyc);
 end
-
-clf
-global t_seq;
-plot(t_seq, model_xt(1, :));
-hold on
