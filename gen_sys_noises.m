@@ -5,7 +5,7 @@ global cyc_total io_dir;
 gen_new = 0; % generate new noises vs. use noises from data file
 
 global noise_level;
-noise_level = 3;
+noise_level = 1;
 
 global sdv_state; % standard deviation of state noises
 % sdv_state = repmat(0.1, 5, 1);

@@ -8,7 +8,7 @@ if dyn_param_type ~= 0
     num_plot = 4;
 end
 
-figure('name', 'simulation result');
+figure(1);
 clf;
 plot_id = 1;
 subplot(num_plot, 1, plot_id); plot_id = plot_id + 1;

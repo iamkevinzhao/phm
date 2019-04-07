@@ -50,7 +50,7 @@ for cyc = 1 : cyc_total
 end
 
 global dyn_L1_slope;
-dyn_L1_slope = 50;
+dyn_L1_slope = 0.0;
 
 dyn_L1_linear = t_seq;
 for cyc = 1 : cyc_total
