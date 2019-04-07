@@ -1,3 +1,5 @@
+function params()
+
 global g_omega;
 g_omega = 60; % ?
 
@@ -24,3 +26,8 @@ g_Rs = 0.7;
 
 global g_E;
 g_E = 10;
+
+global chi_6;
+chi_6 = 12.592;
+
+end

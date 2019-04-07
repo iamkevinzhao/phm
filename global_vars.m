@@ -1,3 +1,5 @@
+function global_vars()
+
 clear all;
 
 params
@@ -24,4 +26,6 @@ global t_seq;
 t_seq = zeros(1, cyc_total);
 for cyc = 1 : cyc_total;
     t_seq(cyc) = sim_ts * cyc;
+end
+
 end

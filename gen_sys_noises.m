@@ -2,7 +2,7 @@ function gen_sys_noises()
 
 global cyc_total io_dir;
 
-gen_new = 1; % generate new noises vs. use noises from data file
+gen_new = 0; % generate new noises vs. use noises from data file
 
 global sdv_state; % standard deviation of state noises
 % sdv_state = repmat(0.1, 5, 1);

@@ -1,6 +1,6 @@
 function cpf()
 
-global sdv_state sdv_msu sim_Zt sim_ts sys_A sys_B sys_ut cyc_total;
+global sdv_state sdv_msu sim_Zt sim_ts sys_A sys_B sys_ut cyc_total chi_6;
 
 ns_state = sdv_state;
 ns_state = ns_state * 1.4;
@@ -23,8 +23,6 @@ P = ...
  
 global model_xt;
 model_xt = zeros(5, cyc_total);
-
-chi_6 = 12.592;
 
 global cpf_d;
 cpf_d = zeros(1, cyc_total);
