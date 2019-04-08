@@ -9,7 +9,7 @@ J = g_J;
 B = g_B;
 P = g_P;
 
-global sys_ut sim_ts noise_state noise_msu;
+global sys_ut sim_ts noise_state noise_msu noise_xdot;
 
 global sim_xt sim_Zt;
 sim_xt = zeros(5, cyc_total);
@@ -42,7 +42,7 @@ for cyc = 2 : cyc_total;
     
     [matA, matB] = sys_mats(theta, cyc - 1);
     x_dot = matA * xt + matB * sys_ut(:, cyc - 1);
-    sim_xt(:, cyc) = xt + x_dot .* sim_ts + noise_state(:, cyc);
+    sim_xt(:, cyc) = xt + (x_dot + noise_xdot(:, cyc)) .* sim_ts;
     
     sim_Zt(:, cyc) = H * sim_xt(:, cyc) + noise_msu(:, cyc);
 end

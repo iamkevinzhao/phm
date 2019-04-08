@@ -1,20 +1,24 @@
 function gen_dyn_params()
 
-global t_seq cyc_total g_Rs g_L1;
+global t_seq cyc_total g_Rs g_L1 g_lambda;
 
 global dyn_param_type;
-dyn_param_type = 1;
+dyn_param_type = 0;
 
 %% nominal
 dyn_Rs_nominal = repmat(g_Rs, 1, cyc_total);
 dyn_L1_nominal = repmat(g_L1, 1, cyc_total);
+dyn_lambda_nominal = repmat(g_lambda, 1, cyc_total);
 
 %% step
 global g_Rs_step;
-g_Rs_step = g_Rs * 6;
+g_Rs_step = g_Rs * 0.9;
 
 global g_L1_step;
-g_L1_step = g_L1 * 6;
+g_L1_step = g_L1 * 0.9;
+
+global g_lambda_step;
+g_lambda_step = g_lambda * 0.9;
 
 t_trigger = 0.5;
 
@@ -33,6 +37,15 @@ for cyc = 1 : cyc_total
         dyn_L1_step(cyc) = g_L1_step;
     else
         dyn_L1_step(cyc) = g_L1;
+    end
+end
+
+dyn_lambda_step = t_seq;
+for cyc = 1 : cyc_total
+    if t_seq(cyc) > t_trigger
+        dyn_lambda_step(cyc) = g_lambda_step;
+    else
+        dyn_lambda_step(cyc) = g_lambda;
     end
 end
 
@@ -62,16 +75,19 @@ for cyc = 1 : cyc_total
 end
 
 %%
-global dyn_Rs dyn_L1;
+global dyn_Rs dyn_L1 dyn_lambda;
 if dyn_param_type == 1
     dyn_Rs = dyn_Rs_linear;
     dyn_L1 = dyn_L1_linear;
+    % dyn_lambda = dyn_lambda_linear;
 elseif dyn_param_type == 2
     dyn_Rs = dyn_Rs_step;
     dyn_L1 = dyn_L1_step;
+    dyn_lambda = dyn_lambda_step;
 else
     dyn_Rs = dyn_Rs_nominal;
     dyn_L1 = dyn_L1_nominal;
+    dyn_lambda = dyn_lambda_nominal;
 end
 end
 

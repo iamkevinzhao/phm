@@ -20,6 +20,19 @@ else
     noise_state = noise_state.noise_state;
 end
 
+global sdv_xdot;
+sdv_xdot_common = 40;
+sdv_xdot = [sdv_xdot_common * noise_level, sdv_xdot_common * noise_level, sdv_xdot_common * noise_level, 0, 0]';
+global noise_xdot;
+if gen_new == 0
+    noise_xdot = ...
+        normrnd(zeros(5, cyc_total), repmat(sdv_xdot, 1, cyc_total));
+    save([io_dir '/noise_xdot.mat'], 'noise_xdot');
+else
+    noise_xdot = load([io_dir '/noise_xdot.mat']);
+    noise_xdot = noise_xdot.noise_xdot;
+end
+
 global sdv_msu; % standard deviation of measurement noises
 sdv_msu = repmat(0.1 * noise_level, 3, 1);
 global noise_msu; % noises over time on measurements
