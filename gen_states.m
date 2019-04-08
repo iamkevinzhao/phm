@@ -1,6 +1,6 @@
 function gen_states()
 
-global cyc_total;
+global cyc_total t_seq;
 global g_Rs g_lambda g_L1 g_J g_B g_P;
 Rs = g_Rs;
 lambda_p = g_lambda;
@@ -39,7 +39,9 @@ H = ...
 for cyc = 2 : cyc_total;    
     xt = sim_xt(:, cyc - 1);
     theta = xt(5);
-    x_dot = sys_A(theta) * xt + sys_B * sys_ut(:, cyc);
+    
+    [matA, matB] = sys_mats(theta, cyc - 1);
+    x_dot = matA * xt + matB * sys_ut(:, cyc - 1);
     sim_xt(:, cyc) = xt + x_dot .* sim_ts + noise_state(:, cyc);
     
     sim_Zt(:, cyc) = H * sim_xt(:, cyc) + noise_msu(:, cyc);
