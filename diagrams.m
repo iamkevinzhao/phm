@@ -34,7 +34,9 @@ if dyn_param_type ~= 0
     if dyn_param_type == 1
         title(sprintf('Rs over time (slope = %0.2f)', dyn_Rs_slope));
     elseif dyn_param_type == 2
-        title(sprintf('Rs over time (Rs: %0.2f -> %0.2f, by %0.1f\%)', g_Rs, g_Rs_step, dyn_step_ratio));
+        title(sprintf(...
+            'Rs over time (Rs: %0.2f -> %0.2f, by %0.1f%%)', ...
+            g_Rs, g_Rs_step, dyn_step_ratio * 100));
     end
     
     subplot(num_plot, 1, plot_id); plot_id = plot_id + 1;
@@ -42,14 +44,18 @@ if dyn_param_type ~= 0
     if dyn_param_type == 1
         title(sprintf('L1 over time (slope = %0.2f)', dyn_L1_slope));
     elseif dyn_param_type == 2
-        title(sprintf('L1 over time (Rs: %0.5f -> %0.5f, by %0.1f\%)', g_L1, g_L1_step, dyn_step_ratio));
+        title(sprintf(...
+            'L1 over time (Rs: %0.5f -> %0.5f, by %0.1f%%)', ...
+            g_L1, g_L1_step, dyn_step_ratio * 100));
     end
     
     subplot(num_plot, 1, plot_id); plot_id = plot_id + 1;
     plot(t_seq, dyn_lambda);
     if dyn_param_type == 1
     elseif dyn_param_type == 2
-        title(sprintf('Lambda over time (Lambda %0.5f -> %0.5f, by %0.1f\%)', g_lambda, g_lambda_step, dyn_step_ratio));
+        title(sprintf(...
+            'Lambda over time (Lambda %0.5f -> %0.5f, by %0.1f%%)', ...
+            g_lambda, g_lambda_step, dyn_step_ratio * 100));
     end
 end
 end
