@@ -2,7 +2,7 @@ function diagrams()
 global t_seq sim_xt sim_Zt model_xt cpf_d chi_6 cyc_total dyn_Rs;
 global dyn_param_type dyn_Rs_slope g_Rs g_Rs_step noise_level dyn_L1;
 global dyn_L1_slope g_L1 g_L1_step dyn_lambda g_lambda g_lambda_step;
-global dyn_step_ratio;
+global dyn_step_ratio io_dir;
 
 num_plot = 2;
 if dyn_param_type ~= 0
@@ -58,4 +58,8 @@ if dyn_param_type ~= 0
             g_lambda, g_lambda_step, dyn_step_ratio * 100));
     end
 end
+
+save([io_dir '/t_seq.mat'], 't_seq');
+save([io_dir '/cpf_d.mat'], 'cpf_d');
+save([io_dir '/cpf_d.mat'], 'cpf_d');
 end
