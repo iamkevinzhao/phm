@@ -3,7 +3,7 @@ function gen_dyn_params()
 global t_seq cyc_total g_Rs g_L1 g_lambda;
 
 global dyn_param_type;
-dyn_param_type = 0;
+dyn_param_type = 2;
 
 %% nominal
 dyn_Rs_nominal = repmat(g_Rs, 1, cyc_total);
@@ -12,13 +12,13 @@ dyn_lambda_nominal = repmat(g_lambda, 1, cyc_total);
 
 %% step
 global g_Rs_step;
-g_Rs_step = g_Rs * 0.9;
+g_Rs_step = g_Rs * 0.8;
 
 global g_L1_step;
-g_L1_step = g_L1 * 0.9;
+g_L1_step = g_L1 * 0.8;
 
 global g_lambda_step;
-g_lambda_step = g_lambda * 0.9;
+g_lambda_step = g_lambda * 0.8;
 
 t_trigger = 0.5;
 

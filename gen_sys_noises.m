@@ -21,7 +21,7 @@ noise_level = 1;
 % end
 
 global sdv_xdot;
-sdv_xdot_common = 1000;
+sdv_xdot_common = 400;
 sdv_xdot = [sdv_xdot_common * noise_level, sdv_xdot_common * noise_level, sdv_xdot_common * noise_level, 0, 0]';
 global sdv_state;
 sdv_state = sdv_xdot .* sim_ts; % important!

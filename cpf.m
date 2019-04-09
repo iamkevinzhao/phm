@@ -23,14 +23,11 @@ for cyc = 2 : cyc_total
     A = sys_A(xk(5));
     B = sys_B;
     xk_dot = A * xk + B * sys_ut(:, cyc - 1);
-    xk = xk_dot .* sim_ts;
+    xk = xk + xk_dot .* sim_ts;
     model_xt(:, cyc) = xk;
-    % Pk = (A .* sim_ts) * Pk * (A .* sim_ts)' + Rk;
-    Pk = Rk;
+    Pk = (A .* sim_ts) * Pk * (A .* sim_ts)' + Rk;
     P = [Pk(1:3, 1:3) zeros(3, 3); zeros(3, 3) Qk];
-    P
     x_hat = [xk(1:3); sim_Zt(1:3, cyc)];
-    x_hat
     P_tilde = M * inv(M' * inv(P) * M) * M';
     x_tilde = P_tilde * inv(P) * x_hat;
     model_xt(1:3, cyc) = x_tilde(1:3);
