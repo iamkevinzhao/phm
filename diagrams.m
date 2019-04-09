@@ -1,11 +1,12 @@
 function diagrams()
 global t_seq sim_xt sim_Zt model_xt cpf_d chi_6 cyc_total dyn_Rs;
 global dyn_param_type dyn_Rs_slope g_Rs g_Rs_step noise_level dyn_L1;
-global dyn_L1_slope g_L1 g_L1_step;
+global dyn_L1_slope g_L1 g_L1_step dyn_lambda g_lambda g_lambda_step;
+global dyn_step_ratio;
 
 num_plot = 2;
 if dyn_param_type ~= 0
-    num_plot = 4;
+    num_plot = 5;
 end
 
 figure(1);
@@ -33,7 +34,7 @@ if dyn_param_type ~= 0
     if dyn_param_type == 1
         title(sprintf('Rs over time (slope = %0.2f)', dyn_Rs_slope));
     elseif dyn_param_type == 2
-        title(sprintf('Rs over time (Rs: %0.2f -> %0.2f)', g_Rs, g_Rs_step));
+        title(sprintf('Rs over time (Rs: %0.2f -> %0.2f, by %0.1f\%)', g_Rs, g_Rs_step, dyn_step_ratio));
     end
     
     subplot(num_plot, 1, plot_id); plot_id = plot_id + 1;
@@ -41,7 +42,14 @@ if dyn_param_type ~= 0
     if dyn_param_type == 1
         title(sprintf('L1 over time (slope = %0.2f)', dyn_L1_slope));
     elseif dyn_param_type == 2
-        title(sprintf('L1 over time (Rs: %0.5f -> %0.5f)', g_L1, g_L1_step));
+        title(sprintf('L1 over time (Rs: %0.5f -> %0.5f, by %0.1f\%)', g_L1, g_L1_step, dyn_step_ratio));
+    end
+    
+    subplot(num_plot, 1, plot_id); plot_id = plot_id + 1;
+    plot(t_seq, dyn_lambda);
+    if dyn_param_type == 1
+    elseif dyn_param_type == 2
+        title(sprintf('Lambda over time (Lambda %0.5f -> %0.5f, by %0.1f\%)', g_lambda, g_lambda_step, dyn_step_ratio));
     end
 end
 end

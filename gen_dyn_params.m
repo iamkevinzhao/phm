@@ -11,14 +11,17 @@ dyn_L1_nominal = repmat(g_L1, 1, cyc_total);
 dyn_lambda_nominal = repmat(g_lambda, 1, cyc_total);
 
 %% step
+global dyn_step_ratio;
+dyn_step_ratio = 0.8;
+
 global g_Rs_step;
-g_Rs_step = g_Rs * 0.8;
+g_Rs_step = g_Rs * dyn_step_ratio;
 
 global g_L1_step;
-g_L1_step = g_L1 * 0.8;
+g_L1_step = g_L1 * dyn_step_ratio;
 
 global g_lambda_step;
-g_lambda_step = g_lambda * 0.8;
+g_lambda_step = g_lambda * dyn_step_ratio;
 
 t_trigger = 0.5;
 
