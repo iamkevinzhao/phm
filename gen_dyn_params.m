@@ -12,7 +12,7 @@ dyn_lambda_nominal = repmat(g_lambda, 1, cyc_total);
 
 %% step
 global dyn_step_ratio;
-dyn_step_ratio = 0.8;
+dyn_step_ratio = 0.7;
 
 global g_Rs_step;
 g_Rs_step = g_Rs * dyn_step_ratio;

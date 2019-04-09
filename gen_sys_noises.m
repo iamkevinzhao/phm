@@ -2,7 +2,7 @@ function gen_sys_noises()
 
 global cyc_total io_dir sim_ts;
 
-gen_new = 0; % generate new noises vs. use noises from data file
+gen_new = 1; % generate new noises vs. use noises from data file
 
 global noise_level;
 noise_level = 1;
@@ -26,7 +26,7 @@ sdv_xdot = [sdv_xdot_common * noise_level, sdv_xdot_common * noise_level, sdv_xd
 global sdv_state;
 sdv_state = sdv_xdot .* sim_ts; % important!
 global noise_xdot;
-if gen_new == 0
+if gen_new == 1
     noise_xdot = ...
         normrnd(zeros(5, cyc_total), repmat(sdv_xdot, 1, cyc_total));
     save([io_dir '/noise_xdot.mat'], 'noise_xdot');
@@ -36,7 +36,7 @@ else
 end
 
 global sdv_msu; % standard deviation of measurement noises
-sdv_msu = repmat(0.1 * noise_level, 3, 1);
+sdv_msu = repmat(0.5 * noise_level, 3, 1);
 global noise_msu; % noises over time on measurements
 if gen_new == 1
     noise_msu = ...
