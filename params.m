@@ -30,4 +30,12 @@ g_E = 10;
 global chi_6;
 chi_6 = 12.592;
 
+global sdv_xdot_common;
+sdv_xdot_common = 400;
+
+global sdv_msu_common;
+sdv_msu_common = 0.5;
+
+global dyn_step_ratio;
+dyn_step_ratio = 0.8;
 end

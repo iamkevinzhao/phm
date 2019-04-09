@@ -1,6 +1,6 @@
 function gen_dyn_params()
 
-global t_seq cyc_total g_Rs g_L1 g_lambda;
+global t_seq cyc_total g_Rs g_L1 g_lambda dyn_step_ratio;
 
 global dyn_param_type;
 dyn_param_type = 2;
@@ -11,9 +11,6 @@ dyn_L1_nominal = repmat(g_L1, 1, cyc_total);
 dyn_lambda_nominal = repmat(g_lambda, 1, cyc_total);
 
 %% step
-global dyn_step_ratio;
-dyn_step_ratio = 0.7;
-
 global g_Rs_step;
 g_Rs_step = g_Rs * dyn_step_ratio;
 

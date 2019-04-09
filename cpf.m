@@ -1,6 +1,6 @@
 function cpf()
 
-global sys_A sys_B cyc_total sys_ut sdv_state sdv_msu sim_Zt sim_ts;
+global sys_A sys_B cyc_total sys_ut sdv_state sdv_msu sim_Zt sim_ts chi_6;
 
 global model_xt;
 model_xt = zeros(5, cyc_total);
@@ -35,6 +35,30 @@ for cyc = 2 : cyc_total
     cpf_d(cyc) = (x_hat - x_tilde)' * inv(P) * (x_hat - x_tilde);
 end
 
+num_anom = 0;
+num_cyc = 0;
+for cyc = 1 : cyc_total / 2
+    num_cyc = num_cyc + 1;
+    if cpf_d(cyc) > chi_6
+        num_anom = num_anom + 1;
+    end
+end
+
+before = num_anom * 1.0 / num_cyc;
+
+num_anom = 0;
+num_cyc = 0;
+for cyc = cyc_total / 2 : cyc_total
+    num_cyc = num_cyc + 1;
+    if cpf_d(cyc) > chi_6
+        num_anom = num_anom + 1;
+    end
+end
+
+after = num_anom * 1.0 / num_cyc;
+
+global anom_rate;
+anom_rate = after / before;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

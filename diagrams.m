@@ -2,7 +2,7 @@ function diagrams()
 global t_seq sim_xt sim_Zt model_xt cpf_d chi_6 cyc_total dyn_Rs;
 global dyn_param_type dyn_Rs_slope g_Rs g_Rs_step noise_level dyn_L1;
 global dyn_L1_slope g_L1 g_L1_step dyn_lambda g_lambda g_lambda_step;
-global dyn_step_ratio io_dir;
+global dyn_step_ratio io_dir anom_rate;
 
 num_plot = 2;
 if dyn_param_type ~= 0
@@ -20,14 +20,17 @@ plot(t_seq, model_xt(1, :));
 legend('ground-truth', 'measurement', 'cpf', 'Location', 'northwest');
 noise_desc = {'low', 'medium', 'high'};
 % title(sprintf('Ia over time (noise level: %s)', noise_desc{noise_level}));
-title(sprintf('Ia over time (state noise: 10%%, measure noise: 5%%)'));
+global state_noise_level msu_noise_level;
+title(sprintf(...
+    'Ia over time (system noise: %d%%, measure noise: %d%%, anomaly (Rs, L1, Lambda): %0.1f%%)', ...
+    state_noise_level, msu_noise_level, (1 - dyn_step_ratio) * 100));
 
 subplot(num_plot, 1, plot_id); plot_id = plot_id + 1;
 hold on
 plot(t_seq, cpf_d);
 chi = repmat(chi_6, 1, cyc_total);
 plot(t_seq, chi);
-title('Confidence over time');
+title(sprintf('Confidence over time (anomaly index: %0.2f)', anom_rate));
 
 if dyn_param_type ~= 0
     subplot(num_plot, 1, plot_id); plot_id = plot_id + 1;

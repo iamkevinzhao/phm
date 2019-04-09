@@ -1,27 +1,21 @@
 function gen_sys_noises()
 
-global cyc_total io_dir sim_ts;
+global cyc_total io_dir sim_ts sdv_msu_common sdv_xdot_common;
 
 gen_new = 1; % generate new noises vs. use noises from data file
 
 global noise_level;
 noise_level = 1;
 
-% global sdv_state; % standard deviation of state noises
-% % sdv_state = repmat(0.1, 5, 1);
-% sdv_state = [0.1 * noise_level, 0.1 * noise_level, 0.1 * noise_level, 0, 0]';
-% global noise_state; % noises over time on system states
-% if gen_new == 0
-%     noise_state = ...
-%         normrnd(zeros(5, cyc_total), repmat(sdv_state, 1, cyc_total));
-%     save([io_dir '/noise_state.mat'], 'noise_state');
-% else
-%     noise_state = load([io_dir '/noise_state.mat']);
-%     noise_state = noise_state.noise_state;
-% end
-
 global sdv_xdot;
-sdv_xdot_common = 400;
+global state_noise_level;
+if sdv_xdot_common == 40
+    state_noise_level = 1;
+elseif sdv_xdot_common == 200
+    state_noise_level = 5;
+elseif sdv_xdot_common == 400
+    state_noise_level = 10;
+end
 sdv_xdot = [sdv_xdot_common * noise_level, sdv_xdot_common * noise_level, sdv_xdot_common * noise_level, 0, 0]';
 global sdv_state;
 sdv_state = sdv_xdot .* sim_ts; % important!
@@ -36,7 +30,13 @@ else
 end
 
 global sdv_msu; % standard deviation of measurement noises
-sdv_msu = repmat(0.5 * noise_level, 3, 1);
+global msu_noise_level;
+if sdv_msu_common == 0.1
+    msu_noise_level = 1;
+elseif sdv_msu_common == 0.5
+    msu_noise_level = 5;
+end
+sdv_msu = repmat(sdv_msu_common, 3, 1);
 global noise_msu; % noises over time on measurements
 if gen_new == 1
     noise_msu = ...
