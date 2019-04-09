@@ -14,11 +14,11 @@ plot_id = 1;
 subplot(num_plot, 1, plot_id); plot_id = plot_id + 1;
 hold on
 plot(t_seq, sim_xt(1, :));
-% plot(t_seq, sim_Zt(1, :));
-% plot(t_seq, model_xt(1, :));
-% legend('ground-truth', 'measurement', 'cpf', 'Location', 'northwest');
-% noise_desc = {'low', 'medium', 'high'};
-% title(sprintf('Ia over time (noise level: %s)', noise_desc{noise_level}));
+plot(t_seq, sim_Zt(1, :));
+plot(t_seq, model_xt(1, :));
+legend('ground-truth', 'measurement', 'cpf', 'Location', 'northwest');
+noise_desc = {'low', 'medium', 'high'};
+title(sprintf('Ia over time (noise level: %s)', noise_desc{noise_level}));
 
 subplot(num_plot, 1, plot_id); plot_id = plot_id + 1;
 hold on
